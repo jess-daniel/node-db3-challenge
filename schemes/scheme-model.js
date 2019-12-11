@@ -41,12 +41,16 @@ const update = (changes, id) => {
 };
 
 const remove = id => {
+  findById(id).then(item => {
+    return (deletedItem = item);
+  });
+
   return db("schemes")
     .where({ id })
     .del()
     .then(removed => {
       if (removed) {
-        return removed;
+        return deletedItem;
       } else {
         return null;
       }
